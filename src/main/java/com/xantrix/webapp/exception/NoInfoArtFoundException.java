@@ -4,19 +4,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Articolo Assente")
-public class NoInfoArtFoundException  extends RuntimeException
-{
+public class NoInfoArtFoundException extends RuntimeException {
 	private static final long serialVersionUID = 809850541299086904L;
-	
+
 	private String CodArt;
 
-	public NoInfoArtFoundException(String codArt)
-	{
+	public NoInfoArtFoundException(String codArt) {
 		this.CodArt = codArt;
 	}
 
-	public String getCodArt()
-	{
+	public String getCodArt() {
 		return CodArt;
 	}
 

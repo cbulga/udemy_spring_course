@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.xantrix.webapp.domain.Iva;
 
-public interface IvaRepository
-{
-	List <Iva> SelIva();
+public interface IvaRepository {
+	List<Iva> SelIva();
 }

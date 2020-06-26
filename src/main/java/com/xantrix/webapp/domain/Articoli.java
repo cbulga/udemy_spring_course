@@ -17,60 +17,58 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xantrix.webapp.validator.CodArt;
 
 @XmlRootElement
-public class Articoli implements Serializable
-{
+public class Articoli implements Serializable {
 	private static final long serialVersionUID = -667971422269719485L;
-	
+
 	private int riga;
-	
-	//https://howtodoinjava.com/hibernate/hibernate-validator-java-bean-validation/
-	
+
+	// https://howtodoinjava.com/hibernate/hibernate-validator-java-bean-validation/
+
 	@NotEmpty(message = "{NotEmpty.Articoli.codArt.validation}")
-	@Size(min=4, max=20, message="{Size.Articoli.codArt.validation}")
-	//@CodArt
+	@Size(min = 4, max = 20, message = "{Size.Articoli.codArt.validation}")
+	// @CodArt
 	private String codArt;
-	
-	@Size(min=8, max=60, message = "{Size.Articoli.descrizione.validation}")
+
+	@Size(min = 8, max = 60, message = "{Size.Articoli.descrizione.validation}")
 	private String descrizione;
-	
+
 	private Double prezzo;
-	
+
 	private Double prezzoKg;
-	
-	@NotNull(message= "{NotNull.Articoli.um.validation}") 
+
+	@NotNull(message = "{NotNull.Articoli.um.validation}")
 	private String um;
-	
+
 	private String codStat;
-	
+
 	@Max(99)
-	@Digits(integer=2, fraction=0, message="{Digits.Articoli.pzCart.validation}")
+	@Digits(integer = 2, fraction = 0, message = "{Digits.Articoli.pzCart.validation}")
 	private int pzCart;
-	
-	@Digits(integer=4, fraction=3, message="{Digits.Articoli.pesoNetto.validation}")
+
+	@Digits(integer = 4, fraction = 3, message = "{Digits.Articoli.pesoNetto.validation}")
 	private double pesoNetto;
-	
+
 	private float qtaMag;
-	
-	@NotNull(message= "{NotNull.Articoli.idIva.validation}") 
+
+	@NotNull(message = "{NotNull.Articoli.idIva.validation}")
 	private int idIva;
-	
-	@NotNull(message= "{NotNull.Articoli.idStatoArt.validation}") 
+
+	@NotNull(message = "{NotNull.Articoli.idStatoArt.validation}")
 	private String idStatoArt;
-	
+
 	private Date dataCreaz;
-	
-	@NotNull(message= "{NotNull.Articoli.idFamAss.validation}")
+
+	@NotNull(message = "{NotNull.Articoli.idFamAss.validation}")
 	private int idFamAss;
-	
+
 	private String desFamAss;
-	
+
 	@JsonIgnore
-	private MultipartFile Immagine; 
-	
-	public Articoli()
-	{
+	private MultipartFile Immagine;
+
+	public Articoli() {
 	}
-	
+
 	@XmlTransient
 	public MultipartFile getImmagine() {
 		return Immagine;
@@ -199,7 +197,5 @@ public class Articoli implements Serializable
 	public void setDesFamAss(String desFamAss) {
 		this.desFamAss = desFamAss;
 	}
-	
-	
 
 }

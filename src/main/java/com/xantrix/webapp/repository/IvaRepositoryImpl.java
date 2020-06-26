@@ -9,19 +9,17 @@ import org.springframework.stereotype.Repository;
 import com.xantrix.webapp.domain.Iva;
 
 @Repository
-public class IvaRepositoryImpl implements IvaRepository
-{
+public class IvaRepositoryImpl implements IvaRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Override
-	public List<Iva> SelIva()
-	{
+	public List<Iva> SelIva() {
 		String Sql = "SELECT A.* FROM IVA A ORDER BY ALIQUOTA ASC;";
-		
+
 		List<Iva> iva = jdbcTemplate.query(Sql, new IvaMapper());
-		
+
 		return iva;
-	} 
+	}
 
 }

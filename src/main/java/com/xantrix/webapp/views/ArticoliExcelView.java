@@ -17,28 +17,25 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.xantrix.webapp.domain.Articoli;
 
-public class ArticoliExcelView  extends AbstractXlsxView
-{
+public class ArticoliExcelView extends AbstractXlsxView {
 	private String fileName;
-	
-	public ArticoliExcelView(String NomeFile)
-	{
+
+	public ArticoliExcelView(String NomeFile) {
 		fileName = NomeFile;
 	}
-	
+
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
+			HttpServletResponse response) throws Exception {
 		// Tipo e nome del file
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-		
+
 		@SuppressWarnings({ "unchecked" })
 		List<Articoli> articoli = (List<Articoli>) model.get("Articoli");
-		
+
 		final Sheet sheet = workbook.createSheet("Articoli");
 		sheet.setDefaultColumnWidth(30);
-		
+
 		// stile intestazione
 		CellStyle style = workbook.createCellStyle();
 		Font font = workbook.createFont();
@@ -48,7 +45,7 @@ public class ArticoliExcelView  extends AbstractXlsxView
 		font.setBold(true);
 		font.setColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
 		style.setFont(font);
-		
+
 		// creazione riga di instestazione
 		Row header = sheet.createRow(0);
 		header.createCell(0).setCellValue("Codice");
@@ -61,12 +58,11 @@ public class ArticoliExcelView  extends AbstractXlsxView
 		header.getCell(3).setCellStyle(style);
 		header.createCell(4).setCellValue("Categoria");
 		header.getCell(4).setCellStyle(style);
-		
+
 		int rowCount = 1;
-		
-		//popolamento del file excel
-		for (Articoli articolo : articoli)
-		{
+
+		// popolamento del file excel
+		for (Articoli articolo : articoli) {
 			Row ArtRow = sheet.createRow(rowCount++);
 			ArtRow.createCell(0).setCellValue(articolo.getCodArt());
 			ArtRow.createCell(1).setCellValue(articolo.getDescrizione());

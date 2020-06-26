@@ -36,4 +36,18 @@
 		<put-attribute name="content" value="/WEB-INF/view/noInfoArt.jsp" />  
 	</definition>
 
+	<definition name="ingredienti" extends="baseLayout">
+		<put-attribute name="titolo"  value="Ricerca Ingredienti" />
+		<put-attribute name="content" value="/WEB-INF/view/ingredienti.jsp" />  
+	</definition>
+
+	<definition name="insIngredienti" extends="baseLayout">
+		<put-attribute name="titolo"  value="Inserimento Nuovo Ingrediente" />
+		<put-attribute name="content" value="/WEB-INF/view/insingrediente.jsp" />  
+	</definition>
+
+	<definition name="movimenti" extends="baseLayout">
+		<put-attribute name="titolo"  value="Ricerca Movimenti" />
+		<put-attribute name="content" value="/WEB-INF/view/movimenti.jsp" />  
+	</definition>
 </tiles-definitions>

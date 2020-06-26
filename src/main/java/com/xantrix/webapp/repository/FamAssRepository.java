@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.xantrix.webapp.domain.FamAssort;
 
-public interface FamAssRepository
-{
-	List <FamAssort> SelFamAssort();
+public interface FamAssRepository {
+	List<FamAssort> SelFamAssort();
 }

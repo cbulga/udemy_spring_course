@@ -9,57 +9,46 @@ import org.springframework.stereotype.Repository;
 import com.xantrix.webapp.domain.Articoli;
 
 @Repository
-public class ArticoliRepositoryImpl implements ArticoliRepository
-{
+public class ArticoliRepositoryImpl implements ArticoliRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Override
-	public List<Articoli> SelArticoliByFilter(String Filtro) 
-	{
-		String Sql = "EXEC [dbo].[Sp_SelArticoli] '" + Filtro + "';";
-		
+	public List<Articoli> SelArticoliByFilter(String Filtro) {
+		String Sql = "CALL Sp_SelArt ('" + Filtro + "', null);";
+
 		List<Articoli> articoli = jdbcTemplate.query(Sql, new ArticoliMapper());
-		
+
 		return articoli;
 	}
 
 	@Override
-	public List<Articoli> SelArticoliByFilter(String Filtro, String OrderBy, String Tipo) 
-	{
-		String Sql = "EXEC [dbo].[Sp_SelArticoli] '" + Filtro + "','" + OrderBy + "','" + Tipo + "'";
-		
+	public List<Articoli> SelArticoliByFilter(String Filtro, String OrderBy, String Tipo) {
+		String Sql = "CALL Sp_SelArt ('" + Filtro + "','" + OrderBy + "','" + Tipo + "')";
+
 		List<Articoli> articoli = jdbcTemplate.query(Sql, new ArticoliMapper());
-		
+
 		return articoli;
 	}
 
 	@Override
-	public void InsArticolo(Articoli articolo) 
-	{
-		String Sql = "EXEC Sp_InsArticoli '" + 
-				 articolo.getCodArt() + "','" + 
-				 articolo.getDescrizione().replace("'", "''") + "','" + 
-				 articolo.getUm() + "','" +
-				 articolo.getCodStat() + "','" +
-				 articolo.getPzCart() + "','" + 
-				 articolo.getPesoNetto() + "','" + 
-				 articolo.getIdIva() + "','" + 
-				 articolo.getIdStatoArt() + "','" +
-				 articolo.getIdFamAss() + "'";
-		 
+	public void InsArticolo(Articoli articolo) {
+		String Sql = "CALL Sp_InsArt ('" + articolo.getCodArt() + "','"
+				+ articolo.getDescrizione().replace("'", "''") + "','" + articolo.getUm() + "','"
+				+ articolo.getCodStat() + "','" + articolo.getPzCart() + "','" + articolo.getPesoNetto() + "','"
+				+ articolo.getIdIva() + "','" + articolo.getIdStatoArt() + "','" + articolo.getIdFamAss() + "')";
+
 		jdbcTemplate.update(Sql);
-		
+
 	}
 
 	@Override
-	public void DelArticolo(String CodArt) 
-	{
+	public void DelArticolo(String CodArt) {
 		String Sql = "DELETE FROM ARTICOLI WHERE CODART = ?";
-		
+
 		jdbcTemplate.update(Sql, CodArt);
-		
+
 	}
 
 }
