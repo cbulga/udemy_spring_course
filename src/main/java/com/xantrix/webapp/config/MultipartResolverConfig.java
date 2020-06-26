@@ -45,7 +45,7 @@ public class MultipartResolverConfig implements ResourceLoaderAware {
 
 			LOG.debug(String.format("UPLOAD IN TEMP DIR = %s", uploadTempDir));
 		} catch (IOException e) {
-			LOG.error(String.format("ERRORE TEMP DIR", UPLOAD_TEMP_DIR), e);
+			LOG.error(String.format("ERRORE TEMP DIR %s", UPLOAD_TEMP_DIR), e);
 		}
 
 		return resolver;

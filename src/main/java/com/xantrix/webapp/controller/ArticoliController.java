@@ -52,7 +52,7 @@ public class ArticoliController {
 	private int NumArt = 0;
 	private List<Articoli> recordset;
 
-	private final String PathImages = "static\\images\\Articoli\\";
+	private final String PathImages = "static/images/Articoli/";
 
 	// http://localhost:8080/alphashop/articoli/cerca/barilla
 	@RequestMapping(value = "/cerca/{filter}", method = RequestMethod.GET)
