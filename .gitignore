@@ -21,3 +21,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+.project
+.settings/
+target/
+.sts4-cache/
+*/.sts4-cache/*
+*/.flattened-pom.xml
+.factorypath
+.classpath
+.flattened-pom.xml
+*/bin/*
+**/.attach_pid*
+/.run/
