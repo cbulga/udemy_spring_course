@@ -50,4 +50,9 @@
 		<put-attribute name="titolo"  value="Ricerca Movimenti" />
 		<put-attribute name="content" value="/WEB-INF/view/movimenti.jsp" />  
 	</definition>
+
+	<definition name="insTerminalino" extends="baseLayout">
+		<put-attribute name="titolo"  value="Inserimento Nuovo Terminalino" />
+		<put-attribute name="content" value="/WEB-INF/view/insterminalino.jsp" />  
+	</definition>
 </tiles-definitions>

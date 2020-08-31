@@ -1,6 +1,7 @@
 package com.xantrix.webapp.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,15 +11,17 @@ import lombok.EqualsAndHashCode.Include;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ingredienti implements Serializable {
+public class Trasmissioni implements Serializable {
 
-	private static final long serialVersionUID = 6152228720599813406L;
+	private static final long serialVersionUID = 943525769761201456L;
 	@Include
-	private String codArt;
-	private String info;
-	private Articoli articoli;
+	private Integer id;
+	private String idTerminale;
+	private Date data;
+	private String barCode;
+	private Integer qta;
 }
