@@ -7,7 +7,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.validation.Validator;
@@ -34,11 +33,11 @@ import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
 import com.xantrix.webapp.domain.Articoli;
-import com.xantrix.webapp.domain.FamAssort;
-import com.xantrix.webapp.domain.Iva;
+import com.xantrix.webapp.domain.Trasmissioni;
 import com.xantrix.webapp.views.ArticoliCsvView;
 import com.xantrix.webapp.views.ArticoliExcelView;
 import com.xantrix.webapp.views.ArticoliPdfView;
+import com.xantrix.webapp.views.TerminalinoPdfView;
 
 @Configuration
 @EnableWebMvc
@@ -110,6 +109,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 	public MarshallingView xmlView() {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		marshaller.setClassesToBeBound(Articoli.class);
+		marshaller.setClassesToBeBound(Trasmissioni.class);
 
 		MarshallingView xmlView = new MarshallingView(marshaller);
 
@@ -185,4 +185,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 		configurer.setUrlPathHelper(urlPathHelper);
 	}
 
+	@Bean
+	public TerminalinoPdfView terminalinoPdfView() {
+		return new TerminalinoPdfView("Terminalino.pdf");
+	}
 }

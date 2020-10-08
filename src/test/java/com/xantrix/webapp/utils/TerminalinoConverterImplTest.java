@@ -210,82 +210,94 @@ public class TerminalinoConverterImplTest {
 		Terminalino terminalino = Terminalino.builder()
 				.dataFile(new MockMultipartFile(ALL_RIGHT_FILE, "42995002", null, this.getClass().getClassLoader().getResourceAsStream(ALL_RIGHT_FILE)))
 				.build();
+		Trasmissioni trasmissioni1 = Trasmissioni.builder()
+				.barCode("8005840004760")
+				.data(NOW)
+				.qta(2)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni2 = Trasmissioni.builder()
+				.barCode("8006040249913")
+				.data(NOW)
+				.qta(1)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni3 = Trasmissioni.builder()
+				.barCode("8006193900000")
+				.data(NOW)
+				.qta(5)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni4 = Trasmissioni.builder()
+				.barCode("8006363015219")
+				.data(NOW)
+				.qta(1)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni5 = Trasmissioni.builder()
+				.barCode("8006450013111")
+				.data(NOW)
+				.qta(10)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni6 = Trasmissioni.builder()
+				.barCode("8006793100000")
+				.data(NOW)
+				.qta(3)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni7 = Trasmissioni.builder()
+				.barCode("8006890609578")
+				.data(NOW)
+				.qta(2)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni8 = Trasmissioni.builder()
+				.barCode("8007750085372")
+				.data(NOW)
+				.qta(12)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni9 = Trasmissioni.builder()
+				.barCode("8008250112698")
+				.data(NOW)
+				.qta(5)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni10 = Trasmissioni.builder()
+				.barCode("8008460027300")
+				.data(NOW)
+				.qta(22)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni11 = Trasmissioni.builder()
+				.barCode("8008970003214")
+				.data(NOW)
+				.qta(1)
+				.idTerminale("42995")
+				.build();
+		Trasmissioni trasmissioni12 = Trasmissioni.builder()
+				.barCode("8009470000307")
+				.data(NOW)
+				.qta(1)
+				.idTerminale("42995")
+				.build();
 		TerminalinoResult expected = TerminalinoResult.builder()
 				.numeroTerminalino("42995")
 				.codicePuntoVendita("002")
 				.trasmissioni(Arrays.asList(
-						Trasmissioni.builder()
-								.barCode("8005840004760")
-								.data(NOW)
-								.qta(2)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8006040249913")
-								.data(NOW)
-								.qta(1)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("800619390000")
-								.data(NOW)
-								.qta(5)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8006363015219")
-								.data(NOW)
-								.qta(1)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8006450013111")
-								.data(NOW)
-								.qta(10)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8006793100000")
-								.data(NOW)
-								.qta(3)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8006890609578")
-								.data(NOW)
-								.qta(2)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8007750085372")
-								.data(NOW)
-								.qta(12)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8008250112698")
-								.data(NOW)
-								.qta(5)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8008460027300")
-								.data(NOW)
-								.qta(22)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8008970003214")
-								.data(NOW)
-								.qta(1)
-								.idTerminale("42995")
-								.build(),
-						Trasmissioni.builder()
-								.barCode("8009470000307")
-								.data(NOW)
-								.qta(1)
-								.idTerminale("42995")
-								.build()
+						trasmissioni1,
+						trasmissioni2,
+						trasmissioni3,
+						trasmissioni4,
+						trasmissioni5,
+						trasmissioni6,
+						trasmissioni7,
+						trasmissioni8,
+						trasmissioni9,
+						trasmissioni10,
+						trasmissioni11,
+						trasmissioni12
 						))
 				.totalRowsInErrorCount(0)
 				.totalRowsCount(12)
@@ -296,5 +308,45 @@ public class TerminalinoConverterImplTest {
 		assertThat(actual)
 				.isNotNull()
 				.isEqualTo(expected);
+		assertThat(actual.getTrasmissioni())
+				.isNotNull()
+				.hasSameSizeAs(expected.getTrasmissioni());
+		assertThat(actual.getTrasmissioni().get(0))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni1, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(1))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni2, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(2))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni3, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(3))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni4, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(4))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni5, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(5))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni6, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(6))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni7, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(7))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni8, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(8))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni9, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(9))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni10, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(10))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni11, "idTerminale", "data", "barCode", "qta");
+		assertThat(actual.getTrasmissioni().get(11))
+				.isNotNull()
+				.isEqualToComparingOnlyGivenFields(trasmissioni12, "idTerminale", "data", "barCode", "qta");
+		
 	}
 }

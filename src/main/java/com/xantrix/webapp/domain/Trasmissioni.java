@@ -24,4 +24,5 @@ public class Trasmissioni implements Serializable {
 	private Date data;
 	private String barCode;
 	private Integer qta;
+	private String descrizione;
 }

@@ -11,8 +11,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.lang.math.NumberUtils;
-
 import com.xantrix.webapp.domain.Terminalino;
 import com.xantrix.webapp.domain.Trasmissioni;
 
@@ -41,7 +39,7 @@ public class TerminalinoConverterImpl implements Converter<TerminalinoResult, Te
 		Objects.requireNonNull(terminalino, TERMINALINO_IS_REQUIRED);
 		Objects.requireNonNull(terminalino.getDataFile(), TERMINALINO_DATA_FILE_IS_REQUIRED);
 		String fileName = terminalino.getDataFile().getResource().getFilename();
-		Date NOW = Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+		Date now = Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 
 		String numeroTerminalino = fileName.substring(0, 5);
 		String codicePuntoVendita = fileName.substring(5, 8);
@@ -64,7 +62,7 @@ public class TerminalinoConverterImpl implements Converter<TerminalinoResult, Te
 
 				Integer qta = 0;
 				try {
-					qta = NumberUtils.createInteger(line.substring(15, 22));
+					qta = Integer.parseInt(line.substring(15, 22));
 				} catch (NumberFormatException ex) {
 					result.addErrorAndIncrementRowsInErrorCount(String.format(THE_ROW_HAS_NOT_A_CORRECT_QUANTITY, result.getTotalRowsCount(), line.substring(15, 22)));
 					continue;
@@ -74,7 +72,7 @@ public class TerminalinoConverterImpl implements Converter<TerminalinoResult, Te
 						.idTerminale(numeroTerminalino)
 						.barCode(line.substring(2, 15))
 						.qta(qta)
-						.data(NOW)
+						.data(now)
 						.build());
 			}
 		} catch (IOException ex) {

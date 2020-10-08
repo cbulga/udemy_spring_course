@@ -11,6 +11,9 @@ import com.xantrix.webapp.utils.Converter;
 import com.xantrix.webapp.utils.TerminalinoConverterImpl;
 import com.xantrix.webapp.utils.TerminalinoResult;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TerminalinoServiceImpl implements TerminalinoService {
 
@@ -27,10 +30,11 @@ public class TerminalinoServiceImpl implements TerminalinoService {
 	public TerminalinoResult processTerminalino(Terminalino terminalino) {
 		Objects.requireNonNull(terminalino, TERMINALINO_IS_REQUIRED);
 		TerminalinoResult result = terminalinoConverter.convert(terminalino);
+		log.debug("Deleting data about the terminal {}", result.getNumeroTerminalino());
+		boolean deleteDone = trasmissioniRepository.deleteByIdTerminale(result.getNumeroTerminalino());
+		log.debug("Delete done for idTerminalino {}: {}", result.getNumeroTerminalino(), deleteDone ? "YES" : "NO");
 
-		if (!result.hasErrors()) {
-			trasmissioniRepository.insTrasmissioni(result.getTrasmissioni());
-		}
+		trasmissioniRepository.insTrasmissioni(result.getTrasmissioni());
 
 		return result;
 	}
