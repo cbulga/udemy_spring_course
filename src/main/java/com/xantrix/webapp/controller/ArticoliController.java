@@ -221,7 +221,7 @@ public class ArticoliController {
 
 	// @RequestMapping(value = "/aggiungi", method = RequestMethod.GET)
 	@GetMapping(value = "/aggiungi")
-	public String InsArticoli(Model model) {
+	public String insArticoli(Model model) {
 		Articoli articolo = new Articoli();
 
 		// List<FamAssort> famAssort = famAssRepository.SelFamAssort();
@@ -231,6 +231,21 @@ public class ArticoliController {
 		model.addAttribute("famAssort", getFamAssort());
 		model.addAttribute("iva", getIva());
 		model.addAttribute("newArticolo", articolo);
+
+		return "insArticolo";
+	}
+
+	@GetMapping(value = "/modifica/{codArt}")
+	public String updArticoli(Model model, @PathVariable("codArt") String codArt) {
+		Articoli articolo = articoliService.SelArticoliByFilter(codArt).get(0);
+
+		if (articolo == null)
+			throw new NoInfoArtFoundException(codArt);
+
+		model.addAttribute("Titolo", "Modifica Articolo");
+		model.addAttribute("newArticolo", articolo);
+		model.addAttribute("famAssort", getFamAssort());
+		model.addAttribute("Iva", getIva());
 
 		return "insArticolo";
 	}
@@ -280,6 +295,47 @@ public class ArticoliController {
 
 		return "redirect:/articoli/infoart/" + articolo.getCodArt().trim();
 		// return "redirect:/articoli/cerca/" + articolo.getCodArt();
+	}
+
+	@RequestMapping(value = "/modifica/{codArt}", method = RequestMethod.POST)
+	public String gestUpdArticoli(@Valid @ModelAttribute("newArticolo") Articoli articolo, BindingResult result, @PathVariable("codArt") String codArt, Model model, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			return "insArticolo";
+		}
+
+		MultipartFile productImage = articolo.getImmagine();
+
+		if (productImage != null && !productImage.isEmpty()) {
+			try {
+				String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+				String PathName = rootDirectory + PathImages + articolo.getCodArt().trim() + ".png";
+
+				productImage.transferTo(new File(PathName));
+			} catch (Exception ex) {
+				throw new RuntimeException("Errore trasferimento file", ex);
+			}
+		}
+
+		if (result.getSuppressedFields().length > 0)
+			throw new RuntimeException("ERRORE: Tentativo di eseguire il binding dei seguenti campi NON consentiti: " + StringUtils.arrayToCommaDelimitedString(result.getSuppressedFields()));
+		else {
+			articoliService.InsArticolo(articolo);
+		}
+
+		return "redirect:/articoli/infoart/" + codArt.trim();
+	}
+
+	@GetMapping(value = "/elimina/{codArt}")
+	public String delArticolo(@PathVariable("codArt") String codArt, Model model) {
+		try {
+			if (codArt.length() > 0) {
+				articoliService.DelArticolo(codArt);
+			}
+		} catch (Exception ex) {
+			throw new RuntimeException("Errore eliminazione articolo", ex);
+		}
+
+		return "redirect:/articoli/cerca/" + codArt;
 	}
 
 	@InitBinder
