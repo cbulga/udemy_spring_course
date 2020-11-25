@@ -21,6 +21,7 @@ public class Trasmissioni implements Serializable {
 	@Include
 	private Integer id;
 	private String idTerminale;
+	private String codicePuntoVendita;
 	private Date data;
 	private String barCode;
 	private Integer qta;

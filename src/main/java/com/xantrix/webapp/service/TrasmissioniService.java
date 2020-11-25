@@ -13,7 +13,7 @@ public interface TrasmissioniService {
 
 	/**
 	 * Returns a {@link List}&lt;Trasmissioni&gt; applying the provided filter.
-	 * 
+	 * Sp_InsTrasmissioni
 	 * @param idTerminale {@link String} about the {@link Trasmissioni#getIdTerminale()} filter.
 	 * @return a {@link List}&lt;Trasmissioni&gt; applying the provided filter.
 	 */

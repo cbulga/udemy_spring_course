@@ -34,7 +34,7 @@ public class TrasmissioniRepositoryImplTest {
 	private EasyRandom easyRandom;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		easyRandom = new EasyRandom();
 //		sut = new TrasmissioniRepositoryImpl();
 //		sut.jdbcTemplate = jdbcTemplate;
@@ -42,7 +42,7 @@ public class TrasmissioniRepositoryImplTest {
 
 	@Test
 	@DisplayName(value = "insTrasmissioni called with null trasmissioni throws NullPointerException")
-	public void insTrasmissioni_NullTrasmissioni_Exception() {
+	void insTrasmissioni_NullTrasmissioni_Exception() {
 		assertThatThrownBy(() -> sut.insTrasmissioni(null))
 				.isInstanceOf(NullPointerException.class)
 				.hasMessage(TrasmissioniRepositoryImpl.TRASMISSIONI_CANNOT_BE_NULL);
@@ -50,7 +50,7 @@ public class TrasmissioniRepositoryImplTest {
 
 	@Test
 	@DisplayName(value = "insTrasmissioni called with not null trasmissioni - ok")
-	public void insTrasmissioni_NotNullTrasmissioni_Ok() {
+	void insTrasmissioni_NotNullTrasmissioni_Ok() {
 		// setup
 		List<Trasmissioni> trasmissioni = easyRandom.objects(Trasmissioni.class, 3).collect(Collectors.toList());
 		// test
@@ -60,16 +60,19 @@ public class TrasmissioniRepositoryImplTest {
 		assertThat(jdbcTemplateCaptor).isNotNull();
 		List<Object> capturedParameters = jdbcTemplateCaptor.getAllValues();
 		assertThat(capturedParameters.get(0)).isNotNull().isEqualTo(trasmissioni.get(0).getIdTerminale());
-		assertThat(capturedParameters.get(1)).isNotNull().isEqualTo(trasmissioni.get(0).getData());
-		assertThat(capturedParameters.get(2)).isNotNull().isEqualTo(trasmissioni.get(0).getBarCode());
-		assertThat(capturedParameters.get(3)).isNotNull().isEqualTo(trasmissioni.get(0).getQta());
-		assertThat(capturedParameters.get(4)).isNotNull().isEqualTo(trasmissioni.get(1).getIdTerminale());
-		assertThat(capturedParameters.get(5)).isNotNull().isEqualTo(trasmissioni.get(1).getData());
-		assertThat(capturedParameters.get(6)).isNotNull().isEqualTo(trasmissioni.get(1).getBarCode());
-		assertThat(capturedParameters.get(7)).isNotNull().isEqualTo(trasmissioni.get(1).getQta());
-		assertThat(capturedParameters.get(8)).isNotNull().isEqualTo(trasmissioni.get(2).getIdTerminale());
-		assertThat(capturedParameters.get(9)).isNotNull().isEqualTo(trasmissioni.get(2).getData());
-		assertThat(capturedParameters.get(10)).isNotNull().isEqualTo(trasmissioni.get(2).getBarCode());
-		assertThat(capturedParameters.get(11)).isNotNull().isEqualTo(trasmissioni.get(2).getQta());
+		assertThat(capturedParameters.get(1)).isNotNull().isEqualTo(trasmissioni.get(0).getCodicePuntoVendita());
+		assertThat(capturedParameters.get(2)).isNotNull().isEqualTo(trasmissioni.get(0).getData());
+		assertThat(capturedParameters.get(3)).isNotNull().isEqualTo(trasmissioni.get(0).getBarCode());
+		assertThat(capturedParameters.get(4)).isNotNull().isEqualTo(trasmissioni.get(0).getQta());
+		assertThat(capturedParameters.get(5)).isNotNull().isEqualTo(trasmissioni.get(1).getIdTerminale());
+		assertThat(capturedParameters.get(6)).isNotNull().isEqualTo(trasmissioni.get(1).getCodicePuntoVendita());
+		assertThat(capturedParameters.get(7)).isNotNull().isEqualTo(trasmissioni.get(1).getData());
+		assertThat(capturedParameters.get(8)).isNotNull().isEqualTo(trasmissioni.get(1).getBarCode());
+		assertThat(capturedParameters.get(9)).isNotNull().isEqualTo(trasmissioni.get(1).getQta());
+		assertThat(capturedParameters.get(10)).isNotNull().isEqualTo(trasmissioni.get(2).getIdTerminale());
+		assertThat(capturedParameters.get(11)).isNotNull().isEqualTo(trasmissioni.get(2).getCodicePuntoVendita());
+		assertThat(capturedParameters.get(12)).isNotNull().isEqualTo(trasmissioni.get(2).getData());
+		assertThat(capturedParameters.get(13)).isNotNull().isEqualTo(trasmissioni.get(2).getBarCode());
+		assertThat(capturedParameters.get(14)).isNotNull().isEqualTo(trasmissioni.get(2).getQta());
 	}
 }

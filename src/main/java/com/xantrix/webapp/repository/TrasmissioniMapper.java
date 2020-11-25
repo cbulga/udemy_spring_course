@@ -12,6 +12,7 @@ public class TrasmissioniMapper implements RowMapper<Trasmissioni> {
 		return Trasmissioni.builder()
 				.barCode(row.getString("BARCODE"))
 				.data(row.getDate("DATA"))
+				.codicePuntoVendita("CODICEPUNTOVENDITA")
 				.descrizione(row.getString("DESCRIZIONE"))
 				.idTerminale(row.getString("IDTERMINALE"))
 				.qta(row.getInt("QTA"))

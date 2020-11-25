@@ -2,7 +2,6 @@ package com.xantrix.webapp.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -44,7 +43,7 @@ public class TerminalinoServiceImplTest {
 
 	@Test
 	@DisplayName(value = "processTerminalino with null terminalino throws a NullPointerException")
-	public void processTerminalino_NullTerminalino_Exception() {
+	void processTerminalino_NullTerminalino_Exception() {
 		assertThatThrownBy(() -> sut.processTerminalino(null))
 				.isInstanceOf(NullPointerException.class)
 				.hasMessage(TerminalinoServiceImpl.TERMINALINO_IS_REQUIRED);
@@ -52,7 +51,7 @@ public class TerminalinoServiceImplTest {
 
 	@Test
 	@DisplayName(value = "processTerminalino with not null terminalino - ok")
-	public void processTerminalino_NotNullTerminalino_Ok() {
+	void processTerminalino_NotNullTerminalino_Ok() {
 		// setup
 		Terminalino terminalino = new Terminalino();
 		List<Trasmissioni> trasmissioni = easyRandom.objects(Trasmissioni.class, 3).collect(Collectors.toList());
@@ -73,8 +72,8 @@ public class TerminalinoServiceImplTest {
 	}
 
 	@Test
-	@DisplayName(value = "processTerminalino with not null terminalino, but terminalino result has errors, so nothing is stored into the application database - ok")
-	public void processTerminalino_NotNullTerminalinoButTerminalinoResultHasErrors_Ok() {
+	@DisplayName(value = "processTerminalino with not null terminalino, but terminalino result has errors, so only valid records are stored to database - ok")
+	void processTerminalino_NotNullTerminalinoButTerminalinoResultHasErrors_Ok() {
 		// setup
 		Terminalino terminalino = new Terminalino();
 		List<Trasmissioni> trasmissioni = easyRandom.objects(Trasmissioni.class, 3).collect(Collectors.toList());
@@ -89,7 +88,7 @@ public class TerminalinoServiceImplTest {
 		TerminalinoResult actual = sut.processTerminalino(terminalino);
 		// assertions
 		verify(terminalinoConverter).convert(terminalino);
-		verify(trasmissioniRepository, never()).insTrasmissioni(ArgumentMatchers.<List<Trasmissioni>>any());
+		verify(trasmissioniRepository).insTrasmissioni(ArgumentMatchers.<List<Trasmissioni>>any());
 		assertThat(actual)
 				.isNotNull()
 				.isEqualTo(expected);

@@ -70,6 +70,7 @@ public class TerminalinoConverterImpl implements Converter<TerminalinoResult, Te
 
 				result.addTrasmissioni(Trasmissioni.builder()
 						.idTerminale(numeroTerminalino)
+						.codicePuntoVendita(codicePuntoVendita)
 						.barCode(line.substring(2, 15))
 						.qta(qta)
 						.data(now)
