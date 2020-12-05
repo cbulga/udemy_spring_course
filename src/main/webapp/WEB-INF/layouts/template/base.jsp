@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
  
 
 <!doctype html>
@@ -28,18 +29,17 @@
     		<span class="navbar-toggler-icon"></span>
   		</button>
   		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-  		
   			 <a class="navbar-brand" href="<spring:url value="/webstore/lastart"/>">Alpha Shop</a>
   			     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       				<li class="nav-item active">
-        				<a class="nav-link" href="#">
+        				<a class="nav-link" href='<spring:url value="/"/>'>
         					<span class="oi oi-home" title="home" aria-hidden="true"></span>
         					Home 
         					<span class="sr-only">(current)</span>
         				</a>
       				</li>
       				<li class="nav-item">
-        				<a class="nav-link" href="#">
+        				<a class="nav-link" href='<spring:url value="/articoli"/>'>
         					<span class="oi oi-box" title="box" aria-hidden="true"></span>
         					Prodotti
         				</a>
@@ -66,10 +66,14 @@
     			</ul>
     			
     			<!-- Search Box -->
-    			<form class="form-inline my-2 my-lg-0" id="search" role="search">
-      				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
-    			</form>
+    			<c:choose>
+    				<c:when test = "${IsArticoli}">
+    					<form:form class="form-inline my-2 my-lg-0" id="search" role="search" method="GET" action="/alphashop/articoli/search">
+		      				<input type="text" onClick="this.select();"  class="form-control mr-sm-2" name="filter" value="${filter}" placeholder="Cerca Articoli">
+		      				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+		    			</form:form>
+    				</c:when>
+    			</c:choose>
     			
     			<!-- dropdown menu -->
     			<div class="dropdown">

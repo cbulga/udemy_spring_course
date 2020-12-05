@@ -54,6 +54,32 @@ public class ArticoliController {
 
 	private final String PathImages = "static/images/Articoli/";
 
+	@RequestMapping(method = RequestMethod.GET)
+	public String GetArticoli(Model model) {
+		model.addAttribute("Titolo", "Ricerca Articoli");
+		model.addAttribute("Titolo2", "Ricerca gli articoli");
+		model.addAttribute("IsArticoli", true);
+
+		return "articoli";
+	}
+
+	@GetMapping(value = "/search")
+	public String SearchItem(@RequestParam("filter") String pSearchTerm, Model model) {
+		recordset = articoliService.SelArticoliByFilter(pSearchTerm);
+
+		if (recordset != null)
+			NumArt = recordset.size();
+
+		model.addAttribute("NumArt", NumArt);
+		model.addAttribute("Titolo", "Ricerca Articoli");
+		model.addAttribute("Titolo2", "Risultati Ricerca " + pSearchTerm);
+		model.addAttribute("Articoli", recordset);
+		model.addAttribute("IsArticoli", true);
+		model.addAttribute("filter", pSearchTerm);
+
+		return "articoli";
+	}
+
 	// http://localhost:8080/alphashop/articoli/cerca/barilla
 	@RequestMapping(value = "/cerca/{filter}", method = RequestMethod.GET)
 	public String GetArticoliByFilter(@PathVariable("filter") String Filter, Model model) {
@@ -335,7 +361,7 @@ public class ArticoliController {
 			throw new RuntimeException("Errore eliminazione articolo", ex);
 		}
 
-		return "redirect:/articoli/cerca/" + codArt;
+		return "redirect:/articoli/";
 	}
 
 	@InitBinder

@@ -20,6 +20,7 @@
 			<h3 class="page-title">Risultati Ricerca: <small>Trovati ${NumArt} Articoli</small></h3>
 		</div>
 		<div class="col-md-6 col-sm-6">
+			<a href="<spring:url value="/articoli/aggiungi" /> "  style="margin-left: 20px;" class="btn btn-success float-right">Nuovo Articolo</a>
 			<div id="rep" class="datafilter">
 				<label>
 					Pagine: 
@@ -42,6 +43,8 @@
 		                <th>Prezzo</th>
 		                <th>Categoria</th>
 		                <th></th>
+		                <th></th>
+		                <th></th>
 		            </tr>
 	        	</thead>
 	        	<tfoot>
@@ -63,6 +66,16 @@
 								<a href=" <spring:url value="/articoli/infoart/${articolo.codArt}" /> " class="btn btn-primary">
 									<span class="oi oi-plus"/></span> Dettaglio 
 	      						</a> 
+      						</td>
+      						<td>
+								<a href="<spring:url value="/articoli/modifica/${articolo.codArt}" /> " class="btn btn-warning table-buttons">
+								<span class="oi oi-pencil"></span> Modifica 
+      							</a> 
+      						</td>
+      						<td>
+								<a href="<spring:url value="/articoli/elimina/${articolo.codArt}" /> " class="btn btn-danger table-buttons">
+								<span class="oi oi-trash"/></span> Elimina 
+      							</a> 
       						</td>
 						</tr>
 					</c:forEach>

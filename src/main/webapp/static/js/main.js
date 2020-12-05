@@ -5,6 +5,6 @@ $(document).ready(function() {
 
 		var $parent = $(this).parent();
 		$parent.addClass('active');
-		e.preventDefault();
+//		e.preventDefault();
 	});
 });
