@@ -144,13 +144,21 @@ public class ArticoliController {
 
 		List<Articoli> recordset = articoliService.SelArticoliByFilter(Filter, orderBy, tipo);
 
-		recordset = recordset.stream().filter(u -> IdRep.contains(Integer.toString(u.getIdFamAss())))
-				.filter(u -> u.getQtaMag() > 0).filter(u -> u.getPrezzo() > 0).collect(Collectors.toList());
+		recordset = recordset
+				.stream()
+				.filter(u -> IdRep.contains(Integer.toString(u.getIdFamAss())))
+				.filter(u -> u.getQtaMag() > 0)
+				.filter(u -> u.getPrezzo() > 0)
+				.collect(Collectors.toList());
 
 		if (recordset != null)
 			NumArt = recordset.size();
 
-		recordset = recordset.stream().skip(SkipValue).limit(LimitValue).collect(Collectors.toList());
+		recordset = recordset
+				.stream()
+				.skip(SkipValue)
+				.limit(LimitValue)
+				.collect(Collectors.toList());
 
 		/*
 		 * if (orderBy.equals("codart") && tipo.equals("asc")) recordset =
@@ -177,9 +185,11 @@ public class ArticoliController {
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("daData") Date startDate,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("aData") Date endDate, Model model) {
 
-		List<Articoli> recordset = articoliService.SelArticoliByFilter(Filter).stream()
-				.filter(u -> u.getDataCreaz().after(startDate)).filter(U -> U.getDataCreaz().before(endDate))
-				.collect(Collectors.toList());
+			List<Articoli> recordset = articoliService.SelArticoliByFilter(Filter)
+					.stream()
+					.filter(u -> u.getDataCreaz().after(startDate))
+					.filter(U -> U.getDataCreaz().before(endDate))
+					.collect(Collectors.toList());
 
 		if (recordset != null)
 			NumArt = recordset.size();
@@ -366,8 +376,7 @@ public class ArticoliController {
 
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
-		binder.setAllowedFields("codArt", "descrizione", "um", "pzCart", "pesoNetto", "idIva", "idStatoArt", "idFamAss",
-				"dataCreaz", "language", "immagine");
+		binder.setAllowedFields("CodArt", "codArt", "descrizione", "um", "pzCart", "pesoNetto", "idIva", "idStatoArt","idFamAss","dataCreaz","language","immagine");
 
 		binder.setDisallowedFields("prezzo");
 

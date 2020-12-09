@@ -147,22 +147,21 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 
 		return resolver;
 	}
-
-	/*
-	 * Alternetiva del MessageSource
-	 * 
-	 * @Bean public MessageSource messageSource() {
-	 * ReloadableResourceBundleMessageSource messageSource = new
-	 * ReloadableResourceBundleMessageSource();
-	 * messageSource.setBasename("classpath:messages");
-	 * messageSource.setDefaultEncoding("UTF-8"); return messageSource; }
-	 */
-
+	
+	/* Alternetiva del MessageSource
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
 		resource.setBasename("messages");
 
+		return resource;
+	}
+	*/
+
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
+		resource.setBasename("messages");
 		return resource;
 	}
 
