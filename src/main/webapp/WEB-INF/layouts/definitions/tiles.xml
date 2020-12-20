@@ -70,4 +70,14 @@
 		<put-attribute name="titolo"  value="Ricerca Trasmissioni" />
 		<put-attribute name="content" value="/WEB-INF/view/trasmissioni.jsp" />  
 	</definition>
+
+	<definition name="baseLogIn" template="/WEB-INF/layouts/template/baseLogin.jsp">
+		<put-attribute name="titolo" value="" />
+		<put-attribute name="content" value="" />
+	</definition>
+
+	<definition name="login" extends="baseLogIn">
+		<put-attribute name="titolo"  value="Accesso al Sito" />
+		<put-attribute name="content" value="/WEB-INF/view/login.jsp" />  
+	</definition>
 </tiles-definitions>
