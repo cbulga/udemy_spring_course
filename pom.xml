@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<springframework.version>5.2.12.RELEASE</springframework.version>
+		<springframework.version>5.3.14</springframework.version>
 		<easyrandom.version>4.2.0</easyrandom.version>
 		<spring-boot-starter-test.version>2.3.1.RELEASE</spring-boot-starter-test.version>
 		<spring-data.version>2.3.4.RELEASE</spring-data.version>
